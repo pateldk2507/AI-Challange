@@ -1,0 +1,5 @@
+node_modules
+.git
+.env
+.qc-debug
+**/__pycache__

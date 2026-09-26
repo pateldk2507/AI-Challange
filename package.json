@@ -1,0 +1,21 @@
+{
+  "name": "form-qc-nodejs",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local/offline PDF quality-control validator for MP-F-023, QS-F-049, Lot Logs and Discard Forms",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js && node --check src/extractors/localExtractor.js && node --check src/validators/index.js && node --check src/validators/discard.js && node --check public/app.js && python3 -m py_compile src/local/analyze_pdf.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}

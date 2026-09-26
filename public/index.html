@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>REGENMED - Internal Document Reviewer</title>
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+
+  <a class="skip-link" href="#results">Skip to results</a>
+
+  <main class="shell">
+
+    <!-- =========================================================
+         HEADER / BRANDING
+    ========================================================== -->
+
+    <section class="hero">
+
+      <div class="brand-area">
+
+        <img
+          src="/regenmed-logo.png"
+          alt="REGENMED - Lake Superior Centre for Regenerative Medicine"
+          class="regenmed-logo"
+        />
+
+        <div class="brand-divider" aria-hidden="true"></div>
+
+        <div class="brand-copy">
+
+         
+          <h1>
+            REGENMED
+            <span class="product-name">
+              Internal Document Reviewer
+            </span>
+          </h1>
+
+          <p>
+            Review and validate MP-F-023, QS-F-049, Lot Logs,
+            Discard Forms, and other internal quality-control documents.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="header-tools">
+
+        <button
+          id="textSizeBtn"
+          class="secondary-button"
+          type="button"
+          aria-pressed="false"
+        >
+          Larger text
+        </button>
+
+        <p class="privacy">
+          Internal use only. Uploaded documents remain on this computer
+          during the review.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         UPLOAD
+    ========================================================== -->
+
+    <section
+      class="card upload-card"
+      aria-label="Upload a form"
+    >
+
+      <form id="uploadForm">
+
+        <label id="dropzone" class="dropzone">
+
+          <input
+            id="fileInput"
+            class="file-input"
+            name="pdf"
+            type="file"
+            accept="application/pdf,.pdf"
+            aria-label="Choose a PDF to analyze"
+          />
+
+          <div
+            class="step-number"
+            aria-hidden="true"
+          >
+            1
+          </div>
+
+          <div class="file-copy">
+
+            <strong>
+              Choose document
+            </strong>
+
+            <span id="fileLabel">
+              Click to select a PDF, or drag and drop it here.
+            </span>
+
+          </div>
+
+        </label>
+
+        <button
+          id="analyzeBtn"
+          type="submit"
+          disabled
+        >
+          2. Review document
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- =========================================================
+         PROGRESS
+    ========================================================== -->
+
+    <section
+      id="progress"
+      class="card hidden"
+      role="status"
+    >
+
+      <div
+        class="spinner"
+        aria-hidden="true"
+      ></div>
+
+      <div>
+
+        <strong>
+          Reviewing document…
+        </strong>
+
+        <p id="progressText">
+          Checking form requirements. Results will appear below.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         RESULTS
+    ========================================================== -->
+
+    <section
+      id="results"
+      class="hidden"
+      aria-live="polite"
+      tabindex="-1"
+    ></section>
+
+  </main>
+
+
+  <!-- =========================================================
+       EVIDENCE DIALOG
+  ========================================================== -->
+
+  <dialog
+    id="evidenceDialog"
+    aria-labelledby="evidenceTitle"
+  >
+
+    <div class="dialog-header">
+
+      <h2 id="evidenceTitle">
+        Document Evidence
+      </h2>
+
+      <button
+        id="closeEvidenceBtn"
+        type="button"
+      >
+        Close image
+      </button>
+
+    </div>
+
+    <p id="evidenceCaption"></p>
+
+    <div class="image-stage">
+
+      <img
+        id="evidenceImage"
+        alt=""
+      />
+
+    </div>
+
+  </dialog>
+
+
+  <script src="/app.js"></script>
+
+</body>
+</html>
