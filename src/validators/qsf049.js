@@ -26,13 +26,20 @@ function validateReviewCell(issues, page, row, column, cell) {
       add("Initials could not be read confidently. Check the image.", cell?.reviewImage, true);
     }
 
-    const dateConfidence = cell?.dateConfidence ?? cell?.confidence;
+    // Handwritten dates are often easy to see but difficult for local OCR to
+    // transcribe reliably.  A clearly populated date area must not create a
+    // false "check image" issue just because OCR confidence is low.
+    //
+    // Rules:
+    //   1. No visible date writing -> definite missing-date error.
+    //   2. OCR produced a date string -> validate its actual format/date value.
+    //      Confidence alone does not create an error.
+    //   3. Visible handwriting exists but OCR could not transcribe it (MARK) ->
+    //      treat the field as populated.  This avoids false positives such as
+    //      the handwritten Item 10 Quality date in the supplied QS-F-049.
     if (!hasValue(cell?.date) && !cell?.hasDateMark) {
       add("Date is missing.", cell?.dateImage || cell?.reviewImage);
-    } else if (cell?.date === "MARK" || lowConfidence(dateConfidence, 0.85) || !hasValue(cell?.date)) {
-      add("Date could not be read confidently. Check the image; MM/DD/YY and MM-DD-YY are both accepted.",
-        cell?.dateImage || cell?.reviewImage, true);
-    } else if (!isStrictMmDdYy(cell.date)) {
+    } else if (hasValue(cell?.date) && cell.date !== "MARK" && !isStrictMmDdYy(cell.date)) {
       add("Date must be a real date in MM/DD/YY or MM-DD-YY format.", cell?.dateImage || cell?.reviewImage, false, cell.date);
     }
   }

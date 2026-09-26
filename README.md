@@ -101,3 +101,7 @@ Every page is validated independently. Donor #, Reason for Discard, authorizatio
 The shared date check accepts real dates in both `MM/DD/YY` and `MM-DD-YY`, with consistent separators. Existing presence-based MP-F-023 and Lot Log date checks continue to accept these formats. Discard dates that cannot be read reliably require manual review; they are not reported as blank. Tissue-name crops preserve the original handwriting in the report.
 
 The tests cover the three-page Discard sample, deliberately cleared fields and X boxes, checkbox selection, Graft ID/status combinations, dashes as N/A, and both date separators. The upload bar is compact, and the wider results table has a fixed header while scrolling.
+
+## QS-F-049 handwritten date handling
+
+Handwritten review dates that are visibly present but cannot be transcribed confidently by local OCR are treated as populated and no longer generate a `Date could not be read confidently` warning. If OCR does produce a date string, its date format is still validated.

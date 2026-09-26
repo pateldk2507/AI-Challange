@@ -76,3 +76,14 @@ test("MP-F-023 groups missing initials/date and missing production values", () =
   assert.equal(result.issues[1].field, "Posterior Tibialis");
   assert.match(result.issues[1].message, /# Produced is blank.*# Packaged is blank/);
 });
+
+test("QS-F-049 accepts a clearly handwritten date mark when OCR cannot transcribe it", () => {
+  const copy = structuredClone(qs);
+  const cell = copy.pages[0].reviewRows[9].quality;
+  cell.date = "MARK";
+  cell.hasDateMark = true;
+  cell.dateConfidence = 0;
+  const result = validateDocument(copy);
+  assert.equal(result.status, "PASS");
+  assert.equal(result.issues.length, 0);
+});
